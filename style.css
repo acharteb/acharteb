@@ -1,0 +1,529 @@
+/* Reset y base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0d0d0d;
+  color: #fff;
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+/* Particles background */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 100px 20px 50px;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.highlight {
+  color: #00f3ff;
+  text-shadow: 0 0 8px #00f3ff;
+}
+
+/* Typing effect */
+.typing-text::after {
+  content: '|';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Sección de Foto de Perfil */
+.profile-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+  background: rgba(13, 13, 13, 0.6);
+  position: relative;
+}
+
+.profile-container {
+  perspective: 1000px;
+}
+
+.profile-card {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.profile-card:hover {
+  transform: rotateY(180deg);
+}
+
+.profile-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.profile-front, .profile-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 50px rgba(0, 243, 255, 0.2);
+}
+
+.profile-front {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 3px solid rgba(0, 243, 255, 0.3);
+}
+
+.profile-back {
+  background: linear-gradient(135deg, #0f3460, #1a1a2e);
+  color: #00f3ff;
+  transform: rotateY(180deg);
+  border: 3px solid #00f3ff;
+}
+
+/* Contenedor de imagen */
+.profile-image-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid rgba(0, 243, 255, 0.5);
+  box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+/* Overlay con efecto de pulso */
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(0, 243, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Efecto hover en la imagen */
+.profile-card:hover .profile-image {
+  transform: scale(1.1);
+  filter: brightness(1.2) contrast(1.1);
+}
+
+.profile-card:hover .profile-image-container {
+  box-shadow: 0 0 50px rgba(0, 243, 255, 0.6);
+  border-color: #00f3ff;
+}
+
+/* Información en la parte trasera */
+.profile-info {
+  text-align: center;
+  padding: 20px;
+}
+
+.profile-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #00f3ff;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+.profile-info p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+/* Tags de habilidades */
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.tag {
+  background: rgba(0, 243, 255, 0.2);
+  color: #00f3ff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: rgba(0, 243, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
+}
+
+/* Efecto de luz que sigue al mouse */
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.profile-card:hover::before {
+  opacity: 1;
+}
+
+/* Efecto de partículas alrededor de la foto */
+.profile-card::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 25px;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(0, 243, 255, 0.3),
+    transparent,
+    rgba(128, 0, 255, 0.3),
+    transparent
+  );
+  animation: rotateBorder 3s linear infinite;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.profile-card:hover::after {
+  opacity: 1;
+}
+
+@keyframes rotateBorder {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Efecto de brillo al pasar el mouse */
+.profile-front, .profile-back {
+  transition: all 0.5s ease;
+}
+
+.profile-card:hover .profile-front,
+.profile-card:hover .profile-back {
+  box-shadow: 0 0 50px rgba(0, 243, 255, 0.4);
+}
+
+/* Proyectos */
+.projects {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.project-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.project-card {
+  width: 250px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.project-card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+}
+
+.card-front {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #fff;
+}
+
+.card-back {
+  background: linear-gradient(135deg, #0f3460, #1a1a2e);
+  color: #00f3ff;
+  transform: rotateY(180deg);
+}
+
+/* Sección de Redes Sociales */
+.social-section {
+  padding: 100px 20px;
+  text-align: center;
+  background: rgba(13, 13, 13, 0.8);
+}
+
+.social-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-shadow: 0 0 15px #00f3ff;
+}
+
+.social-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-card {
+  width: 200px;
+  height: 250px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.social-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.social-card:hover .social-inner {
+  transform: rotateY(180deg) scale(1.05);
+}
+
+.social-front, .social-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 243, 255, 0.3);
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-front {
+  background: linear-gradient(145deg, #1a1a2e, #0f3460);
+  border: 2px solid rgba(0, 243, 255, 0.3);
+}
+
+.social-back {
+  background: linear-gradient(145deg, #0f3460, #16213e);
+  color: #00f3ff;
+  transform: rotateY(180deg);
+  border: 2px solid #00f3ff;
+}
+
+/* Iconos de Redes Sociales Mejorados */
+.social-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon svg {
+  width: 30px;
+  height: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Colores específicos para cada red social */
+.github-icon {
+  background: linear-gradient(135deg, #24292e, #0d1117);
+  border: 2px solid #6e7681;
+}
+
+.linkedin-icon {
+  background: linear-gradient(135deg, #0077b5, #005885);
+  border: 2px solid #00a0dc;
+}
+
+.whatsapp-icon {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border: 2px solid #25D366;
+}
+
+.instagram-icon {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  border: 2px solid #fff;
+}
+
+.x-icon {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  border: 2px solid #6e6e6e;
+}
+
+/* Icono de Credly */
+.credly-icon {
+  background: linear-gradient(135deg, #ff6b00, #ff8c00);
+  border: 2px solid #ffb347;
+}
+
+/* Efectos hover para los iconos */
+.social-card:hover .social-icon {
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 0 30px currentColor;
+}
+
+.social-card:hover .github-icon {
+  box-shadow: 0 0 30px #6e7681;
+}
+
+.social-card:hover .linkedin-icon {
+  box-shadow: 0 0 30px #0077b5;
+}
+
+.social-card:hover .whatsapp-icon {
+  box-shadow: 0 0 30px #25D366;
+}
+
+.social-card:hover .instagram-icon {
+  box-shadow: 0 0 30px #bc1888;
+}
+
+.social-card:hover .x-icon {
+  box-shadow: 0 0 30px #000000;
+}
+
+
+.social-card:hover .credly-icon {
+  box-shadow: 0 0 30px #ff6b00;
+}
+
+/* Efecto de brillo pulsante */
+@keyframes glow {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.5); }
+  100% { filter: brightness(1); }
+}
+
+.social-card:hover .social-icon svg {
+  animation: glow 1s infinite;
+}
+
+/* Efecto de rotación continua suave */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.social-card:hover .social-icon {
+  animation: none;
+  transform: scale(1.3);
+}
+
+/* Efecto de neón especial para cada red */
+.github-icon:hover {
+  box-shadow: 0 0 20px #6e7681, 0 0 30px #24292e;
+}
+
+.linkedin-icon:hover {
+  box-shadow: 0 0 20px #0077b5, 0 0 30px #005885;
+}
+
+.instagram-icon:hover {
+  box-shadow: 0 0 20px #f09433, 0 0 30px #bc1888;
+}
+
+.whatsapp-icon:hover {
+  box-shadow: 0 0 20px #25D366, 0 0 30px #128C7E;
+}
+
+.x-icon:hover {
+  box-shadow: 0 0 20px #000000, 0 0 30px #ffffff;
+}
+
+.credly-icon:hover {
+  box-shadow: 0 0 20px #ff6b00, 0 0 30px #ff8c00;
+}
